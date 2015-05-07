@@ -1,0 +1,21 @@
+{
+    "name": "Jai/Jai",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jai",
+            "email": "kora.jayaram@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jai\\Jai\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
+
