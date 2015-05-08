@@ -2,10 +2,9 @@
 
 namespace Jai\Backend\Http\Controllers;
 
-
 /*
 * jaikora <kora.jayaram@gmail.com>
- */
+*/
 
 use Jai\Backend\Link;
 use Illuminate\Routing\Controller;

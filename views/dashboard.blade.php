@@ -17,7 +17,6 @@
 
         @endif
 
-
     </div>
     <script>
         $(function(){

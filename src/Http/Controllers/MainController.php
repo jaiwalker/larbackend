@@ -27,8 +27,8 @@ class MainController extends Controller{
 //			} else {
 
 				$controller_path = $this->getNameSpace().'Http\Controllers\\'.$entity.'Controller';
-		    // $controller_path ='Jai\\Page\\Http\\Controllers\\' . $entity . 'Controller';
-		     $controller_path ='Jai\\Backend\\Http\\Controllers\\' . $entity . 'Controller';
+		     $controller_path ='Jai\\Page\\Http\\Controllers\\' . $entity . 'Controller';
+		     //$controller_path ='Jai\\Backend\\Http\\Controllers\\' . $entity . 'Controller';
 			}
 		//}
 
