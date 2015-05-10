@@ -5,18 +5,18 @@ use Jai\Backend\Blog;
 
 use DataFilter;
 use Illuminate\Support\Facades\Config;
+use Jai\Backend\Contracts\BackendInterface;
 
 
 /**
  * 
  * @author kora jai <kora.jayaram@gmail>
  */
-class BlogcategoryController extends CrudController{
-	use \Illuminate\Console\AppNamespaceDetectorTrait;
+class BlogcategoryController extends CrudController implements BackendInterface {
+
 
 	public function all($entity)
 	{
-
 		parent::all($entity);
 		$this->filter = DataFilter::source(new Blog());
 		$this->filter->add('id', 'ID', 'text');
@@ -30,7 +30,6 @@ class BlogcategoryController extends CrudController{
 		$this->grid->add('name','name');
 		$this->grid->add('slug','slug');
 
-		$this->grid->link('/'.$entity.'/edit',"Add New", "TR");  // this not added int ot the repo
 		$this->addStylesToGrid();
 		return $this->returnView();
 	}
@@ -64,14 +63,6 @@ class BlogcategoryController extends CrudController{
 	}
 
 
-	/**
-	 * GetName Space
-	 * @return string
-	 */
-	public function getNameSpace()
-	{
-		return $this->getAppNamespace();
-	}
 
 
 }

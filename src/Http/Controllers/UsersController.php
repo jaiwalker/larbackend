@@ -15,7 +15,7 @@
 
 		public  function all($entity){
 
-			//parent::all($entity);
+			parent::all($entity);
 
 			$this->filter = \DataFilter::source(new User());
 			$this->filter->add('id', 'ID', 'text');

@@ -25,7 +25,12 @@ class BackendServiceProvider extends ServiceProvider {
 
 		$this->publishes([
 				__DIR__.'/config/backend.php' => config_path('backend.php'),
+
 		]);
+
+		// Publish your migrations
+		$this->publishes([__DIR__ . '/../database/migrations/' => database_path('/migrations')], 'migrations');
+
 
 		$this->loadTranslationsFrom(base_path() . '/vendor/zofe/rapyd/lang', 'rapyd');
 

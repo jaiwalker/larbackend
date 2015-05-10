@@ -1,7 +1,6 @@
 <?php
 
 
-
 //'middleware' => 'Jai\\Http\\Middleware\\BackendAuthenticate'
 	Route::group(array('prefix' => 'backend', 'middleware' => 'Jai\\Http\\Middleware\\BackendAuthenticate' ), function()
 	{
@@ -25,7 +24,3 @@
 	Route::controllers([
 		'backendAuth' => 'BackendAuthController',
 	 	]);
-
-
-	//Route::get('backend/login', 'BackendAuthController@getlogin');
-	//Route::post('backend/login', 'BackendAuthController@getlogin');

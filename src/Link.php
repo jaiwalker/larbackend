@@ -23,6 +23,16 @@ class Link extends Model {
 		return $allUrls;
 	}
 
+	public static function getPackageName($entity)
+	{
+		if($entity)
+		{
+			return Link::where('url','=',$entity)->firstOrFail();
+		}
+
+		return false;
+	}
+
 	public static function getMainUrls(){
 		$configs = Link::where('main', '=', true)->get();
 		$mainUrls = array();

@@ -16,21 +16,19 @@ class MainController extends Controller{
 	public function entityUrl($entity, $methods){
 
 		$urls = Link::getMainUrls();
-
+		// Check if  its  main url or not
 		if ( in_array($entity, $urls)){
 			$controller_path = 'Jai\\Backend\\Http\\Controllers\\'.$entity.'Controller';
-		} else {
-			//  this is if  you  have controllers set
-//			$panel_path = \Config::get('panel.controllers');
-//			if ( isset($panel_path) ){
-//				$controller_path = '\\'.$panel_path.'\\'.$entity.'Controller';
-//			} else {
-
-				$controller_path = $this->getNameSpace().'Http\Controllers\\'.$entity.'Controller';
-		     $controller_path ='Jai\\Page\\Http\\Controllers\\' . $entity . 'Controller';
-		     //$controller_path ='Jai\\Backend\\Http\\Controllers\\' . $entity . 'Controller';
+		} else
+		{
+		   //  make  sure  you store the package Name
+		    $value  = Link::getPackageName($entity);
+		    if($value)
+			{
+				$controller_path = 'Jai\\'. $value->packageName.'\\Http\\Controllers\\' . $entity . 'Controller';
 			}
-		//}
+		}
+
 
 		try{
 			$controller = \App::make($controller_path);

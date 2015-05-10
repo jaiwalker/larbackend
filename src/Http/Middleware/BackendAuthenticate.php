@@ -40,9 +40,7 @@ class BackendAuthenticate {
 			}
 			else
 			{
-				//dd("If a guest user ");
 				return redirect('backendAuth/login');
-				//return redirect()->guest('auth/login');
 			}
 		}
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * 
  * @author kora jai <kora.jayaram@gmail>
+ *         TODO: Password Recovery
  */
 class BackendAuthController extends Controller
 {
