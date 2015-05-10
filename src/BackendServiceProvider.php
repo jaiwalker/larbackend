@@ -19,23 +19,24 @@ class BackendServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
-
+		// Load views
 		$this->loadViewsFrom(realpath(__DIR__.'/../views'), 'BackendViews');
+
+		// Setup Routes
 		$this->setupRoutes($this->app->router);
 
+		// Publish Config
 		$this->publishes([
 				__DIR__.'/config/backend.php' => config_path('backend.php'),
-
 		]);
-
 		// Publish your migrations
 		$this->publishes([__DIR__ . '/../database/migrations/' => database_path('/migrations')], 'migrations');
 
 
-		$this->loadTranslationsFrom(base_path() . '/vendor/zofe/rapyd/lang', 'rapyd');
-
+        // Giving out Alia Load
 		AliasLoader::getInstance()->alias('backend', 'Jai\Backend');
 
+		// Load language
 		$this->loadTranslationsFrom(base_path() . '/packages/jai/backend/lang', 'panel');
 		$this->loadTranslationsFrom(base_path() . '/vendor/zofe/rapyd/lang', 'rapyd');
 		//$this->package('jai/Blog',null, __DIR__); //  this  has to be specified for psr-4  compatibility
@@ -48,7 +49,6 @@ class BackendServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-
 		// register  zofe\rapyd
 		$this->app->register('Zofe\Rapyd\RapydServiceProvider');
 		// register html service provider
@@ -61,7 +61,6 @@ class BackendServiceProvider extends ServiceProvider {
 		$loader->alias('Form', 'Illuminate\Html\FormFacade');
 		$loader->alias('Html', 'Illuminate\Html\HtmlFacade');
 
-
 		$this->registerBackend();
 		config([
 				'config/backend.php',
@@ -71,9 +70,16 @@ class BackendServiceProvider extends ServiceProvider {
 				__DIR__.'/../public' => public_path('packages/jai/backend')
 		], 'assets');
 
+	}
 
-
-		///$this->package('jai/Blog');
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @return array
+	 */
+	public function provides()
+	{
+		return [];
 	}
 
 	private function registerBackend(){
@@ -97,15 +103,5 @@ class BackendServiceProvider extends ServiceProvider {
 		});
 	}
 
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return [];
-	}
 
 }

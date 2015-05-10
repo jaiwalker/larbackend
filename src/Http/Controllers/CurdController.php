@@ -43,7 +43,6 @@ class CrudController extends Controller
 		//$this->addStylesToGrid();
 	}
 
-
 	public function getEntity(){
 		return $this->entity;
 	}
@@ -67,8 +66,6 @@ class CrudController extends Controller
 		$this->grid->paginate(10);
 
 	}
-
-
 
 	public function returnView()
 	{

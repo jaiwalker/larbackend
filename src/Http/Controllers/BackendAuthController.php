@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Auth;
 /**
  * 
  * @author kora jai <kora.jayaram@gmail>
- *         TODO: Password Recovery
+ * TODO: Password Recovery
  */
 class BackendAuthController extends Controller
 {
 	use AuthenticatesAndRegistersUsers;
-
-
 
 	/**
 	 * Create a new authentication controller instance.
@@ -37,7 +35,6 @@ class BackendAuthController extends Controller
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
-
 	/**
 	 * Show the application login form.
 	 *
@@ -47,7 +44,6 @@ class BackendAuthController extends Controller
 	{
 		return view('BackendViews::backendlogin');
 	}
-
 
 	/**
 	 * Show the application registration form.
