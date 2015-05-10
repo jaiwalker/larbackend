@@ -5,6 +5,8 @@ namespace Jai\Backend\Http\Controllers;
 * jaikora <kora.jayaram@gmail.com>
 */
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Jai\Backend\Link;
 use Illuminate\Routing\Controller;
 
@@ -16,6 +18,7 @@ class CrudController extends Controller
 	public $edit;
 	public $filter;
 	protected $lang;
+const MODELJAI ='User';
 
 	public function __construct(\Lang $lang)
 	{
@@ -108,6 +111,24 @@ class CrudController extends Controller
 		$lang = \App::make('lang');
 		$this->filter->submit($this->lang->get('panel::fields.search'));
 		$this->filter->reset($this->lang->get('panel::fields.reset'));
+	}
+
+	public function getAll()
+	{
+		//$model = 'Jai/Backend/'.$this->entity;
+		//$model = \App::make();
+
+		$model = 'Jai\\Backend\\'.$this->entity;
+		//$model = App::make();
+		return $model::all();
+	}
+
+	public function getSpecific($id=1)
+	{
+		$model = 'Jai\\Backend\\' . $this->entity;
+
+		//$model = App::make();
+		return $model::findOrfail(array('id'=>1));
 	}
 
 

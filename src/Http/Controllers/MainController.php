@@ -29,7 +29,6 @@ class MainController extends Controller{
 			}
 		}
 
-
 		try{
 			$controller = \App::make($controller_path);
 		}catch(\Exception $ex){
