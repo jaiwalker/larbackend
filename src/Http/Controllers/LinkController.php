@@ -9,14 +9,26 @@
 
 use App\Http\Controllers\Controller;
 //use DataFilter;
+
 use Jai\Backend\Link;
 use Zofe\Rapyd\DataFilter\DataFilter;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Response;
 
 
 class LinkController extends CrudController {
 	use \Illuminate\Console\AppNamespaceDetectorTrait;
+
+	protected $dataTransformer;
+
+	public function __construct(ApiLinkDataTransformer $dataTransformer)
+	{
+
+		$this->dataTransformer = $dataTransformer;
+
+		$this->beforeFilter('auth.basic',['on' =>'post']);
+	}
 
 	public function all($entity)
 	{
@@ -59,6 +71,33 @@ class LinkController extends CrudController {
 		$this->edit->add('packageName', 'Package Name','text');
 		return $this->returnEditView();
 	}
+
+
+	function getAll()
+	{
+		parent::getAll();
+		$all = link::all();
+		return $this->respond([
+				'data' => $this->dataTransformer->transformCollection($all->all())
+		]);
+	}
+
+	public function getSpecific($package, $id = 1)
+	{
+		//$model = 'Jai\\Backend\\' . $this->entity;
+		$result  = Link::find($id);
+		if(!$result)
+		{
+			return $this->respondNotFound('Record Not found');
+		}
+
+		return Response::json([
+				'data' =>$this->dataTransformer->transform($result)
+		],200);
+	}
+
+
+
 
 
 

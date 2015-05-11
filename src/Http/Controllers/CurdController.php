@@ -5,12 +5,14 @@ namespace Jai\Backend\Http\Controllers;
 * jaikora <kora.jayaram@gmail.com>
 */
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Response;
 use Jai\Backend\Link;
 use Illuminate\Routing\Controller;
 
-class CrudController extends Controller
+class CrudController extends ApiController
 {
 	public $grid;
 	public $entity;
@@ -18,7 +20,8 @@ class CrudController extends Controller
 	public $edit;
 	public $filter;
 	protected $lang;
-const MODELJAI ='User';
+
+
 
 	public function __construct(\Lang $lang)
 	{
@@ -28,6 +31,9 @@ const MODELJAI ='User';
 		$this->route    = $route;
 		$routeParamters = $route::current()->parameters();
 		$this->setEntity($routeParamters['entity']);
+		//$this->curdTransformer = $curdTransformer;
+
+		$this->beforeFilter('auth.basic',['on' =>'post']);
 	}
 
 	/**
@@ -114,19 +120,46 @@ const MODELJAI ='User';
 	{
 		//$model = 'Jai/Backend/'.$this->entity;
 		//$model = \App::make();
+//		$value  = Link::getPackageName($this->entity);
+//
+//		if(!$value->packageName){
+//			$model = 'Jai\\Backend\\'.$this->entity;
+//		}else{
+//			$model = 'Jai\\'.$value->packageName.'\\'.$this->entity;
+//		}
+//
+//		//$model = 'Jai\\Backend\\Blog';
+//		//$model = App::make();
+//		$all = $model::all();
+//
+//         // setStatusCode
+//		return $this->respond([
+//				'data' => $this->transformCollection($all->all())
+//		]);
 
-		$model = 'Jai\\Backend\\'.$this->entity;
-		//$model = App::make();
-		return $model::all();
 	}
 
-	public function getSpecific($id=1)
+	public function getSpecific($package,$id=1)
 	{
 		$model = 'Jai\\Backend\\' . $this->entity;
+		$result  = $model::find($id);
 
-		//$model = App::make();
-		return $model::findOrfail(array('id'=>1));
+		if(!$result)
+		{
+			return $this->respondNotFound('Record Not found');
+		}
+
+		return Response::json([
+				'data' =>$this->curdTransformer->transform($result)
+		],200);
+
 	}
+
+
+
+
+
+
 
 
 }
