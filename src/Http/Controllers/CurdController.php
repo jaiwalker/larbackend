@@ -41,7 +41,7 @@ class CrudController extends ApiController
 	 */
 	public function edit($entity)
 	{
-
+		$this->setEntity($entity);
 	}
 
 	/**
@@ -49,6 +49,7 @@ class CrudController extends ApiController
 	 */
 	public function all($entity)
 	{
+		$this->setEntity($entity);
 		//$this->addStylesToGrid();
 	}
 
@@ -68,7 +69,6 @@ class CrudController extends ApiController
 	 */
 	public function addStylesToGrid()
 	{
-
 		$this->grid->edit('edit', 'Edit', 'modify|delete');
 
 		$this->grid->orderBy('id', 'desc');
@@ -116,44 +116,6 @@ class CrudController extends ApiController
 		$this->filter->reset($this->lang->get('panel::fields.reset'));
 	}
 
-	public function getAll()
-	{
-		//$model = 'Jai/Backend/'.$this->entity;
-		//$model = \App::make();
-//		$value  = Link::getPackageName($this->entity);
-//
-//		if(!$value->packageName){
-//			$model = 'Jai\\Backend\\'.$this->entity;
-//		}else{
-//			$model = 'Jai\\'.$value->packageName.'\\'.$this->entity;
-//		}
-//
-//		//$model = 'Jai\\Backend\\Blog';
-//		//$model = App::make();
-//		$all = $model::all();
-//
-//         // setStatusCode
-//		return $this->respond([
-//				'data' => $this->transformCollection($all->all())
-//		]);
-
-	}
-
-	public function getSpecific($package,$id=1)
-	{
-		$model = 'Jai\\Backend\\' . $this->entity;
-		$result  = $model::find($id);
-
-		if(!$result)
-		{
-			return $this->respondNotFound('Record Not found');
-		}
-
-		return Response::json([
-				'data' =>$this->curdTransformer->transform($result)
-		],200);
-
-	}
 
 
 

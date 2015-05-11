@@ -45,7 +45,7 @@ class MainController extends Controller{
 	}
 
 
-	public function apientityUrl($entity, $methods,$params)
+	public function apientityUrl($entity, $methods,$params=NULL)
 	{
 		$urls = Link::getMainUrls();
 		// Check if  its  main url or not
@@ -64,12 +64,14 @@ class MainController extends Controller{
 		try{
 			$controller = \App::make($controller_path);
 		}catch(\Exception $ex){
+		 echo $ex->getMessage();
 			throw new \Exception('No Controller Has Been Set for This Model ');
 		}
 		if (!method_exists($controller, $methods)){
 			throw new \Exception('Controller does not implement the CrudController methods!');
 		} else {
-			return $controller->callAction($methods, array('entity' => $entity));
+			//if(!empty($params))$methods .=$methods.'/'.$params;
+			return $controller->callAction($methods, array('entity' => $entity,'param'=>$params));
 		}
 
 	}

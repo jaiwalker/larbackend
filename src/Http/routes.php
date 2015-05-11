@@ -3,9 +3,10 @@
 
     // Normal backend
 
-	Route::group(array('prefix'=>'ap1/v1/backend'),function()
+	Route::group(array('prefix'=>'api/v1/backend'),function()
 	{
-		Route::any('/{entity}/{methods}/{params}', array('uses' => 'MainController@apientityUrl'));
+		Route::any('/{entity}/{methods}/{num}', array('uses' => 'MainController@apientityUrl'));
+		Route::any('/{entity}/{methods}', array('uses' => 'MainController@apientityUrl'));
 
 	});
 

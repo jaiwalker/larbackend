@@ -3,6 +3,7 @@
 namespace Jai\Backend\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
+use Jai\Page\Http\Controllers\PageDataTransformer;
 
 /**
  * 
@@ -68,6 +69,22 @@ class ApiController extends Controller
 
 		return array_map([$this, 'apiDatatransform'], $data);
 		//dd($shifts_array);
+	}
+
+	public function getApiAllData($transform,$data)
+	{
+		//$transform = new PageDataTransformer();
+		return $this->respond(['data' => $transform->transformCollection($data->all())]);
+
+	}
+
+	public function getApiSpecificData($transform,$result)
+	{
+		if (!$result) {
+			return $this->respondNotFound('Record Not found');
+		}
+
+		return Response::json(['data' => $transform->transform($result)], 200);
 	}
 
 

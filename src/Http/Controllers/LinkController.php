@@ -27,7 +27,7 @@ class LinkController extends CrudController {
 
 		$this->dataTransformer = $dataTransformer;
 
-		$this->beforeFilter('auth.basic',['on' =>'post']);
+		//$this->beforeFilter('auth.basic',['on' =>'post']);
 	}
 
 	public function all($entity)
@@ -75,11 +75,11 @@ class LinkController extends CrudController {
 
 	function getAll()
 	{
-		parent::getAll();
-		$all = link::all();
-		return $this->respond([
-				'data' => $this->dataTransformer->transformCollection($all->all())
-		]);
+//		parent::getAll();
+//		$all = link::all();
+//		return $this->respond([
+//				'data' => $this->dataTransformer->transformCollection($all->all())
+//		]);
 	}
 
 	public function getSpecific($package, $id = 1)
@@ -97,11 +97,6 @@ class LinkController extends CrudController {
 	}
 
 
-
-
-
-
-
 	/**
 	 * GetName Space
 	 * @return string
@@ -111,16 +106,6 @@ class LinkController extends CrudController {
 		return $this->getAppNamespace();
 	}
 
-	/**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
-	public function jai()
-	{
-		//dd(Config::get("blog.message"));
-		return view('BackendViews::master');
-	}
 
 
 
