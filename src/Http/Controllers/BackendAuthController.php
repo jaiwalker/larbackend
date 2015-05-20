@@ -27,10 +27,11 @@ class BackendAuthController extends Controller
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
-		$this->redirectTo = '/backend/Link/all';
+		$this->auth                = $auth;
+		$this->registrar           = $registrar;
+		$this->redirectTo          = '/backend/Link/all';
 		$this->redirectAfterLogout = '/backend/Link/all';
+		$this->loginPath           = '/backendAuth/login';
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -55,6 +56,7 @@ class BackendAuthController extends Controller
 		// Do not show this  when use is logged in
 		return view('BackendViews::backendregister');
 	}
+
 
 
 }

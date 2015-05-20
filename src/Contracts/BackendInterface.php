@@ -7,8 +7,18 @@
  */
  interface BackendInterface
 {
+	 /**
+	  * @param $entity
+	  *
+	  * @return mixed
+	  */
 	 public function all($entity);
 
+	 /**
+	  * @param $entity
+	  *
+	  * @return mixed
+	  */
 	 public function edit($entity);
 
 

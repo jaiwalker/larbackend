@@ -27,7 +27,7 @@ class BlogcategoryController extends CrudController implements BackendInterface 
 
 		$this->grid = \DataGrid::source($this->filter);
 		$this->grid->add('id','ID', true)->style("width:100px");
-		$this->grid->add('name','name');
+		$this->grid->add('name','Name');
 		$this->grid->add('slug','slug');
 
 		$this->addStylesToGrid();
@@ -50,15 +50,16 @@ class BlogcategoryController extends CrudController implements BackendInterface 
 
 		$this->edit->label('Edit Blog Category');
 		$this->edit->link("dashboard", "Dashboard", "TR")->back();
-		$this->edit->add('name', 'Name', 'text');
+
+		$this->edit->add('name', 'Name', 'textarea');
 		$this->edit->add('description', 'Description', 'textarea');
 		$this->edit->add('slug', 'Slug', 'text');
-		$this->edit->add('publication_date', 'Date', 'date')->format('d/m/Y', 'it');
+		$this->edit->add('created_at', 'Date', 'date')->format('d/m/Y', 'it');
 		$this->edit->add('photo', 'Photo', 'image')->move('uploads/demo/')->fit(240, 160)->preview(120, 80);
-		$this->edit->add('public', 'Public', 'checkbox');
+		//$this->edit->add('public', 'Public', 'checkbox');
 		$this->edit->add('categories.name', 'Categories', 'tags');
-		$this->edit->add('detail.note', 'Note', 'textarea')->attributes(array('rows' => 2));
-		$this->edit->add('body', 'Body', 'redactor');
+		//$this->edit->add('detail.note', 'Note', 'textarea')->attributes(array('rows' => 2));
+		//$this->edit->add('body', 'Body', 'redactor');
 		return $this->returnEditView();
 	}
 

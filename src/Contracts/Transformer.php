@@ -1,6 +1,6 @@
 <?php
 
-namespace Jai\Backend\Http\Controllers;
+namespace Jai\Backend\Contracts;
 
 /**
  * 

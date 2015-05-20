@@ -1,6 +1,7 @@
 <?php
 
-namespace Jai\Backend\Http\Controllers;
+namespace Jai\Backend\Apitransformers;
+use Jai\Backend\Contracts\Transformer;
 
 /**
  * 

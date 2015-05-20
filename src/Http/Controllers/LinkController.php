@@ -10,6 +10,7 @@
 use App\Http\Controllers\Controller;
 //use DataFilter;
 
+use Jai\Backend\Apitransformers\ApiLinkDataTransformer;
 use Jai\Backend\Link;
 use Zofe\Rapyd\DataFilter\DataFilter;
 use Zofe\Rapyd\DataEdit\DataEdit;
@@ -20,12 +21,12 @@ use Illuminate\Support\Facades\Response;
 class LinkController extends CrudController {
 	use \Illuminate\Console\AppNamespaceDetectorTrait;
 
-	protected $dataTransformer;
+	protected $transformer;
 
-	public function __construct(ApiLinkDataTransformer $dataTransformer)
+	public function __construct(ApiLinkDataTransformer $linkdataTransformer)
 	{
 
-		$this->dataTransformer = $dataTransformer;
+		$this->transformer = $linkdataTransformer;
 
 		//$this->beforeFilter('auth.basic',['on' =>'post']);
 	}
@@ -75,25 +76,24 @@ class LinkController extends CrudController {
 
 	function getAll()
 	{
+
 //		parent::getAll();
-//		$all = link::all();
+		$all = link::all();
+
+		return parent::getApiAllData($this->transformer, $all);
 //		return $this->respond([
 //				'data' => $this->dataTransformer->transformCollection($all->all())
 //		]);
 	}
 
-	public function getSpecific($package, $id = 1)
+	public function getSpecific($package, $id = NULL)
 	{
-		//$model = 'Jai\\Backend\\' . $this->entity;
-		$result  = Link::find($id);
-		if(!$result)
-		{
-			return $this->respondNotFound('Record Not found');
+		if (empty($id)) {
+			return $this->respondNotFound("Invalid strings");
 		}
+		$result = Link::find($id);
 
-		return Response::json([
-				'data' =>$this->dataTransformer->transform($result)
-		],200);
+		return parent::getApiSpecificData($this->transformer, $result);
 	}
 
 
