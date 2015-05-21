@@ -30,6 +30,9 @@
 		//Route::get('/edit', array('uses' => 'Serverfireteam\Panel\ProfileController@getEdit'));
 
 	});
+	Route::post('oauth/access_token', function () {
+		return Response::json(Authorizer::issueAccessToken());
+	});
 
 
 	Route::controllers([

@@ -10,6 +10,8 @@ use Illuminate\Foundation;
 
 class BackendServiceProvider extends ServiceProvider {
 
+
+
 	/**
 	 * Indicates if loading of the provider is deferred.
 	 *
@@ -54,12 +56,16 @@ class BackendServiceProvider extends ServiceProvider {
 		// register html service provider
 		$this->app->register('Illuminate\Html\HtmlServiceProvider');
 
+		$this->app->register('LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider');
+		$this->app->register('LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider');
+
 		/*
 		 * Create aliases for the dependency.
 		 */
 		$loader = AliasLoader::getInstance();
 		$loader->alias('Form', 'Illuminate\Html\FormFacade');
 		$loader->alias('Html', 'Illuminate\Html\HtmlFacade');
+		$loader->alias('Authorizer', 'LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade');
 
 		$this->registerBackend();
 		config([
